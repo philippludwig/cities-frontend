@@ -1,6 +1,13 @@
+<h1>List of Cities and temperatures</h1>
+
 <ul>
 	<li *ngFor="let c of cities">
-		<app-city [name]="c.name"></app-city>
+		<app-city [name]="c.name" [temperature]="c.temperature"></app-city>
 	</li>
 </ul>
 
+<div>
+	<label for="city-input">Add another city:</label>
+	<input type="text" name="cityname" #cityname>
+	<button (click)="addCity(cityname)">Add city</button>
+</div>

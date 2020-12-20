@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CityComponent implements OnInit {
 
 	@Input() name: string = "";
-	temperature: number = NaN;
+	@Input() temperature: number = NaN;
 
   constructor() {}
 

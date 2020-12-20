@@ -1,1 +1,9 @@
-{{ name }}, {{ temperature }} &deg;C
+<!--
+	We need to set the text direction for the city name,
+	otherwise arabic cities appear between the temperature
+	and the degree symbol.
+-->
+<span dir="ltr"><a title="Open Wikipedia page" href="https://wikipedia.org/wiki/{{name}}" target="_blank">
+	{{ name }}</a></span>
+<span *ngIf="temperature !== null">, {{ temperature | number: '1.2-2' }} &deg;C</span>
+<span *ngIf="temperature === null">: No temperature information available</span>

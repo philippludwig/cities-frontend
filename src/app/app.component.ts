@@ -15,4 +15,9 @@ export class AppComponent {
 	ngOnInit() {
 		this.citiesService.getListOfCities().subscribe(cities => {this.cities = cities;});
 	}
+
+	addCity(el: HTMLInputElement) {
+		this.citiesService.addCity(el.value).subscribe(new_city => {this.cities.push(new_city)});
+		return false;
+	}
 }
