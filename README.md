@@ -1,27 +1,28 @@
-# CitiesFrontend
+# Cities Frontend
+This is the best City temperature tracker in the world.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.4.
+![screenshot](screenshot.png)
 
-## Development server
+## Usage
+* By default, the application displays a list of 10 Cities in the world, plus the current temperature.
+* Additional cities can be added by name.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Architecture
+This web application is implemented via Angular 10. The `CityComponent` displays the City’s name and
+temperature, while the main `AppComponent` displays a list of all cities and the input field for
+adding other entries to the list.
 
-## Code scaffolding
+The data is retrieved by the `CityService`, which issue a `GET` request to the backend server upon
+start. If a new City is added, the service sends a `PUT` request and the result is added to the list.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Know problems
+* If a City is already in the list and the user adds it again, the backend server will not store the city twice. However, it still will return the city’s data, which might cause this web app to add the city to the list, resulting in a duplicated entry. This should be gone after refreshing the page though.
+* There is no error handling implemented at the moment, which means if the backend service goes away the user will not retrieve any useful error message.
 
-## Build
+## Ideas
+* Something like bootstrap could be added to the website, so it does not look like a 1993‘s webpage.
+* A delete button next to each city name could be added.
+* If more weather data would be made available by the backend server, little emojis could be used to indicate the current weather ⛅🌧.
+* A link to `wttr.in` could be added to retrieve the complete report.
+* The input field could support some kind of auto-completion for city names.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
