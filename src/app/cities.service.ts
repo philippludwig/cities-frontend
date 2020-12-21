@@ -61,7 +61,7 @@ export class CitiesService {
 	}
 
 	addCity(name: string): Observable<CityData> {
-		return this.http.put<any>(`${this.backend_url}/cities/${name}`, { headers: this.headers() } ).pipe(
+		return this.http.put<any>(`${this.backend_url}/cities/${name}`, {}, { headers: this.headers() } ).pipe(
 			map(a => new CityData(a))
 		);
 	}
