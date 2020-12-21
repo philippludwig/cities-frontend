@@ -22,14 +22,28 @@ export class CityData {
 })
 export class CitiesService {
 
-	private backend_url = "http://127.0.0.1:8000";
+	private backend_url = "https://backend.citylist.ml";
+	private credentials = "";
+
+	private headers(): any {
+		if (this.credentials === "") {
+			return {};
+		} else {
+			return { "Authorization" : "Basic " + this.credentials };
+		}
+	}
 
   constructor(private http: HttpClient) { }
+
+	// Set new HTTP Basic Auth credentials, which will be used in every request.
+	setCredentials(credentials: string) {
+		this.credentials = credentials;
+	}
 
 	getListOfCities(): Observable<Array<CityData>> {
 		// Retrieve the current list of cities from the backend and
 		// convert the JSON data to CityData.
-		return this.http.get<any>(`${this.backend_url}/cities`).pipe(
+		return this.http.get<any>(`${this.backend_url}/cities`, { headers: this.headers() }).pipe(
 			map(a => {
 				let cities = [];
 				for (let j of a) {
@@ -41,13 +55,13 @@ export class CitiesService {
 	}
 
 	getCity(id: number): Observable<CityData> {
-		return this.http.get<any>(`${this.backend_url}/cities/${id}`).pipe(
+		return this.http.get<any>(`${this.backend_url}/cities/${id}`, { headers: this.headers() }).pipe(
 			map(a => new CityData(a))
 		);
 	}
 
 	addCity(name: string): Observable<CityData> {
-		return this.http.put<any>(`${this.backend_url}/cities/${name}`, {}).pipe(
+		return this.http.put<any>(`${this.backend_url}/cities/${name}`, { headers: this.headers() } ).pipe(
 			map(a => new CityData(a))
 		);
 	}

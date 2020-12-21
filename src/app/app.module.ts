@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CityComponent } from './city/city.component';
 import { CitiesService } from './cities.service';
+import { ConfigService } from './config.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { CitiesService } from './cities.service';
     BrowserModule,
 		HttpClientModule
   ],
-  providers: [CitiesService],
+  providers: [CitiesService, ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

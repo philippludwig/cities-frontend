@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CityData, CitiesService } from './cities.service';
+import { ConfigService } from './config.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,15 @@ import { CityData, CitiesService } from './cities.service';
 export class AppComponent {
 	cities: Array<CityData> = new Array();
 
-	constructor (private citiesService: CitiesService) {}
+	constructor (private citiesService: CitiesService, private configService: ConfigService) {}
 
 	ngOnInit() {
-		this.citiesService.getListOfCities().subscribe(cities => {this.cities = cities;});
+		this.configService.getConfig().subscribe(
+			config => {
+				this.citiesService.setCredentials(config["credentials"]);
+				this.citiesService.getListOfCities().subscribe(cities => {this.cities = cities;});
+			}
+		);
 	}
 
 	addCity(el: HTMLInputElement) {
