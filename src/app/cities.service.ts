@@ -22,10 +22,14 @@ export class CityData {
 })
 export class CitiesService {
 
+	private backend_url = "http://127.0.0.1:8000";
+
   constructor(private http: HttpClient) { }
 
 	getListOfCities(): Observable<Array<CityData>> {
-		return this.http.get<any>(`http://127.0.0.1:8000/cities`).pipe(
+		// Retrieve the current list of cities from the backend and
+		// convert the JSON data to CityData.
+		return this.http.get<any>(`${this.backend_url}/cities`).pipe(
 			map(a => {
 				let cities = [];
 				for (let j of a) {
@@ -37,13 +41,13 @@ export class CitiesService {
 	}
 
 	getCity(id: number): Observable<CityData> {
-		return this.http.get<any>(`http://127.0.0.1:8000/${id}`).pipe(
+		return this.http.get<any>(`${this.backend_url}/cities/${id}`).pipe(
 			map(a => new CityData(a))
 		);
 	}
 
 	addCity(name: string): Observable<CityData> {
-		return this.http.put<any>(`http://127.0.0.1:8000/cities/${name}`, {}).pipe(
+		return this.http.put<any>(`${this.backend_url}/cities/${name}`, {}).pipe(
 			map(a => new CityData(a))
 		);
 	}
